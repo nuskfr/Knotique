@@ -56,10 +56,10 @@ def signup(request):
 def add_to_cart(request, item_id):
     item = CrochetItem.objects.get(id=item_id)
     cart = request.session.get('cart', {})
-    cart[item_id] = {
+    cart[str(item_id)] = {
         'name': item.name,
         'price': float(item.price),
-        'quantity': cart.get(item_id, {}).get('quantity', 0) + 1
+        'quantity': cart.get(str(item_id), {}).get('quantity', 0) + 1
     }
     request.session['cart'] = cart
     return redirect('view_cart')
@@ -70,8 +70,8 @@ def view_cart(request):
 
 def remove_from_cart(request, item_id):
     cart = request.session.get('cart', {})
-    if item_id in cart:
-        del cart[item_id]
+    if str(item_id) in cart:
+        del cart[str(item_id)]
         request.session['cart'] = cart
     return redirect('view_cart')
 
