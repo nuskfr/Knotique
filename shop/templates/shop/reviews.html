@@ -31,15 +31,31 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: start;
+            gap: 20px;
+        }
+        .review img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .review-content {
+            flex: 1;
         }
         .review h3 {
             color: #ff66cc;
+            margin-top: 0;
+            margin-bottom: 10px;
         }
         .stars {
             color: #ffd700;
             font-size: 20px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -62,14 +78,17 @@
     <div class="container">
         {% for review in reviews %}
             <div class="review">
-                <h3>{{ review.user }}</h3>
-                <p>{{ review.review }}</p>
-                <p class="stars">
-                    {% for i in "12345" %}
-                        {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
-                    {% endfor %}
-                    <strong>{{ review.rating }} / 5</strong>
-                </p>
+                <img src="{{ review.image }}" alt="{{ review.user }}">
+                <div class="review-content">
+                    <h3>{{ review.user }}</h3>
+                    <p>{{ review.review }}</p>
+                    <p class="stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+                        {% endfor %}
+                        <strong>{{ review.rating }} / 5</strong>
+                    </p>
+                </div>
             </div>
         {% endfor %}
     </div>

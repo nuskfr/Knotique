@@ -29,16 +29,19 @@ def reviews(request):
             "user": "Shashswot",
             "review": "Amazing crochet products! Highly recommend!",
             "rating": 5,
+            "image": "/media/site_images/reviewer1.png",
         },
         {
             "user": "Sushab",
             "review": "Loved the red rose bouquet. Will buy more.",
             "rating": 4,
+            "image": "/media/site_images/reviewer2.png",
         },
         {
             "user": "Sita",
             "review": "The pink skirt is so pretty, great craftsmanship!",
             "rating": 5,
+            "image": "/media/site_images/reviewer3.jpg",
         },
     ]
     return render(request, 'shop/reviews.html', {'reviews': example_reviews})
