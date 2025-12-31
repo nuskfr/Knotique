@@ -100,12 +100,12 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'homepage' %}" title="Home"><i class="fas fa-home"></i><span class="sr-only">Home</span></a>
         <a href="{% url 'products' %}">All Products</a>
         <a href="{% url 'handwarmers' %}">Handwarmers</a>
         <a href="{% url 'skirts' %}">Skirts</a>
         <a href="{% url 'bouquets' %}">Bouquets</a>
-        <a href="{% url 'view_cart' %}">Cart</a>
+        <a href="{% url 'view_cart' %}" title="Cart"><i class="fas fa-shopping-cart"></i><span class="sr-only">Cart</span></a>
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i><span class="sr-only">Logout</span></a>
         {% else %}
