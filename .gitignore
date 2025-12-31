@@ -28,7 +28,17 @@ wheels/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-/media
+/media/crochet_images/*
+!/media/crochet_images/pinkskirt.jpg
+!/media/crochet_images/lacehandwarmer.jpg
+!/media/crochet_images/redrosebouquet.jpg
+/media/site_images/*
+!/media/site_images/knotiquelogo.png
+!/media/site_images/creator.png
+!/media/site_images/reviewer1.png
+!/media/site_images/reviewer2.png
+!/media/site_images/reviewer3.jpg
+!/media/site_images/background.jpg
 /static
 
 # IDE
