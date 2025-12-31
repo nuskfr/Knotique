@@ -125,7 +125,7 @@
                     {% endfor %}
                 </table>
                 <div class="total">
-                    Total: ${% widthratio cart.items|length 1 1 %}
+                    Total: ${{ total|floatformat:2 }}
                 </div>
                 <div class="text-center mt-4">
                     <a href="{% url 'checkout_cod' %}" class="btn-pink">Proceed to Checkout (COD)</a>

@@ -67,7 +67,8 @@ def add_to_cart(request, item_id):
 
 def view_cart(request):
     cart = request.session.get('cart', {})
-    return render(request, 'shop/cart.html', {'cart': cart})
+    total = sum(item['price'] * item['quantity'] for item in cart.values())
+    return render(request, 'shop/cart.html', {'cart': cart, 'total': total})
 
 def remove_from_cart(request, item_id):
     cart = request.session.get('cart', {})
