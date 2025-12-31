@@ -102,21 +102,10 @@ def checkout_cod(request):
     request.session['cart'] = {}
     return render(request, 'shop/checkout_cod.html', {'cart': cart})
 
-# Placeholder for future eSewa integration
-# def checkout_esewa(request):
-#     """
-#     eSewa payment gateway integration
-#     To be implemented when eSewa merchant account is available
-#     """
-#     cart = request.session.get('cart', {})
-#     if not cart:
-#         return render(request, 'shop/checkout_empty.html')
-#     
-#     # eSewa integration logic will go here
-#     # 1. Calculate total amount
-#     # 2. Generate unique transaction ID
-#     # 3. Prepare eSewa payment form
-#     # 4. Redirect to eSewa payment gateway
-#     # 5. Handle success/failure callbacks
-#     
-#     pass
+# TODO: Future eSewa payment gateway integration
+# When ready to integrate eSewa:
+# - Create checkout_esewa view
+# - Generate unique transaction IDs
+# - Implement eSewa API calls
+# - Handle success/failure callbacks
+# - Update URLs to include eSewa routes
