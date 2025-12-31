@@ -2,13 +2,68 @@
 <html lang="en">
 <head>
     <title>Signup - Knotique</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+        }
+        .signup-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff66cc;
+            margin-bottom: 20px;
+        }
+        .btn-pink {
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-pink:hover {
+            background-color: #ff3399;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .login-link a {
+            color: #ff66cc;
+            font-weight: bold;
+        }
+        .errorlist {
+            color: #ff3399;
+            list-style: none;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Create an account</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
-    </form>
+    <div class="signup-container">
+        <h1>Create an account</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-pink">Signup</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Login here</a>
+        </div>
+        <div class="login-link">
+            <a href="{% url 'homepage' %}">Back to Home</a>
+        </div>
+    </div>
 </body>
 </html>

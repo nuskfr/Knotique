@@ -73,16 +73,26 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Use SQLite for development/testing by default
+# For production with PostgreSQL, set environment variable DATABASE_URL or modify this section
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Knotique',    
-        'USER': 'postgres',    
-        'PASSWORD': 'nice2meety@',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Uncomment the following and comment the above to use PostgreSQL in production
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Knotique',    
+#         'USER': 'postgres',    
+#         'PASSWORD': 'nice2meety@',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -124,4 +134,8 @@ STATIC_URL = 'static/'
 import os
 
 MEDIA_URL = '/media/'  
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Authentication redirects
+LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_REDIRECT_URL = 'homepage'  
