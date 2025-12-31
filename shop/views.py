@@ -3,12 +3,34 @@ from shop.models import CrochetItem
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
+# Sample reviews data shared across views
+SAMPLE_REVIEWS = [
+    {
+        "user": "Shashswot",
+        "review": "Amazing crochet products! Highly recommend!",
+        "rating": 5,
+        "image": "/media/site_images/reviewer1.png",
+    },
+    {
+        "user": "Sushab",
+        "review": "Loved the red rose bouquet. Will buy more.",
+        "rating": 4,
+        "image": "/media/site_images/reviewer2.png",
+    },
+    {
+        "user": "Sita",
+        "review": "The pink skirt is so pretty, great craftsmanship!",
+        "rating": 5,
+        "image": "/media/site_images/reviewer3.jpg",
+    },
+]
+
 def products(request):
     items = CrochetItem.objects.all()
     return render(request, 'shop/products.html', {'items': items})
 
 def homepage(request):
-    return render(request, 'shop/homepage.html')
+    return render(request, 'shop/homepage.html', {'reviews': SAMPLE_REVIEWS})
 
 def skirts(request):
     items = CrochetItem.objects.filter(category='skirts')
@@ -24,27 +46,7 @@ def handwarmers(request):
 
 #i have manually added the reviews as i don't have active customers for now
 def reviews(request):
-    example_reviews = [
-        {
-            "user": "Shashswot",
-            "review": "Amazing crochet products! Highly recommend!",
-            "rating": 5,
-            "image": "/media/site_images/reviewer1.png",
-        },
-        {
-            "user": "Sushab",
-            "review": "Loved the red rose bouquet. Will buy more.",
-            "rating": 4,
-            "image": "/media/site_images/reviewer2.png",
-        },
-        {
-            "user": "Sita",
-            "review": "The pink skirt is so pretty, great craftsmanship!",
-            "rating": 5,
-            "image": "/media/site_images/reviewer3.jpg",
-        },
-    ]
-    return render(request, 'shop/reviews.html', {'reviews': example_reviews})
+    return render(request, 'shop/reviews.html', {'reviews': SAMPLE_REVIEWS})
 
 def signup(request):
     if request.method == 'POST':

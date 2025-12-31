@@ -109,6 +109,7 @@
         .explore-section {
             position: relative;
             height: 400px;
+            background-image: url('/media/site_images/background.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -230,24 +231,18 @@
     <div class="reviews-preview">
         <h2>What Our Customers Say</h2>
         <div class="reviewers-grid">
+            {% for review in reviews %}
             <div class="reviewer-card">
-                <img src="/media/site_images/reviewer1.png" alt="Shashswot">
-                <h4>Shashswot</h4>
-                <p>"Amazing crochet products! Highly recommend!"</p>
-                <div class="stars">★★★★★</div>
+                <img src="{{ review.image }}" alt="{{ review.user }}">
+                <h4>{{ review.user }}</h4>
+                <p>"{{ review.review }}"</p>
+                <div class="stars">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="reviewer-card">
-                <img src="/media/site_images/reviewer2.png" alt="Sushab">
-                <h4>Sushab</h4>
-                <p>"Loved the red rose bouquet. Will buy more."</p>
-                <div class="stars">★★★★☆</div>
-            </div>
-            <div class="reviewer-card">
-                <img src="/media/site_images/reviewer3.jpg" alt="Sita">
-                <h4>Sita</h4>
-                <p>"The pink skirt is so pretty, great craftsmanship!"</p>
-                <div class="stars">★★★★★</div>
-            </div>
+            {% endfor %}
         </div>
         <div class="text-center mt-4">
             <a href="{% url 'reviews' %}" class="btn-pink">Check All Reviews</a>
@@ -255,7 +250,7 @@
     </div>
     
     <!-- Explore Items Section with Background -->
-    <div class="explore-section" style="background-image: url('/media/site_images/background.jpg');">
+    <div class="explore-section">
         <a href="{% url 'products' %}" class="btn-pink">Explore Items</a>
     </div>
 </body>
