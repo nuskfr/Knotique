@@ -12,15 +12,17 @@
         }
         h1 {
             color: #ff66cc;
+            font-size: 36px;
             margin-bottom: 20px;
         }
         .btn-pink {
             background-color: #ff66cc;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border-radius: 5px;
             text-decoration: none;
+            font-size: 18px;
             font-weight: bold;
             display: inline-block;
         }
@@ -32,6 +34,7 @@
 </head>
 <body>
     <h1>Your cart is empty!</h1>
-    <a href="/products/" class="btn-pink">Start Shopping</a>
+    <p>Add some beautiful crochet items to your cart before checking out.</p>
+    <a href="{% url 'products' %}" class="btn-pink">Start Shopping</a>
 </body>
 </html>

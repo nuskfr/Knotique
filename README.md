@@ -1,133 +1,145 @@
-# Knotique - Handmade Crochet Shop
+# Knotique - Handmade Crochet E-commerce Site
 
-Welcome to Knotique, an e-commerce platform for handmade crochet items built with Django.
+A Django-based e-commerce website for selling handmade crochet items including handwarmers, skirts, and bouquets.
 
 ## Features
 
-- Product catalog with categories (handwarmers, skirts, bouquets)
-- Shopping cart functionality
-- User authentication (login/signup)
-- Cash on Delivery checkout
-- Customer reviews
-- Responsive design with Bootstrap
+- 🛍️ **Product Catalog**: Browse products by category (Handwarmers, Skirts, Bouquets)
+- 🛒 **Shopping Cart**: Add items to cart with quantity tracking
+- 💳 **Cash on Delivery (COD)**: Simple checkout process with COD payment option
+- 👤 **User Authentication**: Sign up, login, and logout functionality
+- ⭐ **Customer Reviews**: View customer testimonials
+- 🎨 **Beautiful UI**: Pink-themed, responsive design
 
-## Setup Instructions
+## Installation
 
 ### Prerequisites
 
-- Python 3.8+
-- PostgreSQL 12+
-- pgAdmin (optional, for database management)
+- Python 3.8 or higher
+- pip (Python package manager)
 
-### Installation
+### Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd Knotique
-   ```
+1. Clone the repository:
+```bash
+git clone https://github.com/nuskfr/Knotique.git
+cd Knotique
+```
 
-2. **Install dependencies**
-   ```bash
-   pip install Django psycopg2-binary Pillow
-   ```
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-3. **Configure PostgreSQL**
-   - Ensure PostgreSQL server is running
-   - Create a database named `Knotique`
-   - Update credentials in `myshop/settings.py` if needed:
-     ```python
-     DATABASES = {
-         'default': {
-             'ENGINE': 'django.db.backends.postgresql',
-             'NAME': 'Knotique',
-             'USER': 'postgres',
-             'PASSWORD': 'your_password',
-             'HOST': 'localhost',
-             'PORT': '5432',
-         }
-     }
-     ```
+3. Run database migrations:
+```bash
+python manage.py migrate
+```
 
-4. **Run migrations**
-   ```bash
-   python manage.py migrate
-   ```
+4. Create a superuser (admin):
+```bash
+python manage.py createsuperuser
+```
 
-5. **Create a superuser**
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-6. **Add product images**
-   - Place product images in `media/crochet_images/`
-   - Sample images are already included
-
-7. **Add products via admin panel**
-   ```bash
-   python manage.py runserver
-   ```
-   - Navigate to `http://localhost:8000/admin`
-   - Login with superuser credentials
-   - Add CrochetItem products with:
-     - Name
-     - Description
-     - Price
-     - Image
-     - Category (handwarmers, skirts, bouquets, or general)
-
-## Running the Application
-
+5. Run the development server:
 ```bash
 python manage.py runserver
 ```
 
-Visit `http://localhost:8000` to view the application.
+6. Access the site at `http://localhost:8000/`
 
 ## Project Structure
 
 ```
 Knotique/
-├── myshop/              # Main project settings
-│   ├── settings.py      # Django settings (PostgreSQL configured)
-│   └── urls.py          # URL routing
-├── shop/                # Shop application
-│   ├── models.py        # CrochetItem model
-│   ├── views.py         # View functions
-│   ├── templates/       # HTML templates
-│   └── migrations/      # Database migrations
-├── media/               # User-uploaded files
-│   └── crochet_images/  # Product images
-└── manage.py            # Django management script
+├── myshop/                 # Project settings
+│   ├── settings.py         # Django settings
+│   ├── urls.py            # Main URL configuration
+│   └── wsgi.py            # WSGI configuration
+├── shop/                   # Main app
+│   ├── models.py          # Database models (CrochetItem)
+│   ├── views.py           # View functions
+│   ├── admin.py           # Admin configuration
+│   ├── templates/shop/    # HTML templates
+│   └── migrations/        # Database migrations
+├── media/                  # Uploaded images
+├── db.sqlite3             # SQLite database (development)
+├── requirements.txt       # Python dependencies
+└── manage.py              # Django management script
 ```
 
-## Key Changes from SQLite to PostgreSQL
+## Usage
 
-- Database engine changed from `sqlite3` to `postgresql`
-- Added `psycopg2-binary` dependency for PostgreSQL adapter
-- Created migrations for PostgreSQL database
-- All models now work with PostgreSQL
+### Admin Panel
 
-## Template Enhancements
+Access the admin panel at `http://localhost:8000/admin/` to:
+- Add/edit/delete products
+- Manage users
+- View all crochet items
 
-- Consistent pink theme (#ff66cc) across all pages
-- Styled buttons for all actions
-- Image display in product listings
-- Responsive layout with Bootstrap 5
-- Enhanced user authentication pages
+### Adding Products
 
-## Testing
+1. Log in to the admin panel
+2. Go to "Crochet items"
+3. Click "Add Crochet Item"
+4. Fill in:
+   - Name
+   - Description
+   - Price
+   - Category (handwarmers, skirts, or bouquets)
+   - Image (optional)
 
-To test the application:
+### Customer Features
 
-1. **Authentication**: Try signup and login
-2. **Browse Products**: Visit different category pages
-3. **Shopping Cart**: Add items to cart, remove items
-4. **Checkout**: Complete a cash on delivery order
-5. **Admin Panel**: Manage products through Django admin
+- **Browse Products**: Visit homepage and click category buttons or "Explore All Items"
+- **Add to Cart**: Click "Add to Cart" on any product
+- **View Cart**: Click "Cart" in navigation
+- **Checkout**: Click "Proceed to Checkout (COD)" in cart
+- **Sign Up**: Create an account via "Signup" link
+- **Login**: Access your account via "Login" link
 
-## Notes
+## Database Configuration
 
-- Images should be added to `media/crochet_images/` directory
-- Ensure PostgreSQL server is active before running the application
-- Use pgAdmin for database management and monitoring
+### Development (Default - SQLite)
+
+The project is configured to use SQLite by default for easy development and testing.
+
+### Production (PostgreSQL)
+
+For production, uncomment the PostgreSQL configuration in `myshop/settings.py`:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Knotique',
+        'USER': 'postgres',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+
+## Future Enhancements
+
+- ✨ eSewa payment gateway integration (structure prepared)
+- 📧 Email notifications for orders
+- 📦 Order tracking system
+- 🔍 Product search functionality
+- 💬 Customer review submission
+
+## Technologies Used
+
+- **Backend**: Django 6.0
+- **Database**: SQLite (development) / PostgreSQL (production)
+- **Frontend**: HTML, CSS, Bootstrap 5
+- **Image Handling**: Pillow
+
+## License
+
+This project is created for educational purposes.
+
+## Author
+
+Created by nuskfr - Knotique Handmade Crochet Shop

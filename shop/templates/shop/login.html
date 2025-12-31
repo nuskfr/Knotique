@@ -7,32 +7,23 @@
         body {
             background-color: #ffe6f2;
             font-family: Arial, sans-serif;
-            padding: 50px;
         }
-        h1 {
-            color: #ff66cc;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .login-form {
+        .login-container {
             max-width: 400px;
-            margin: 0 auto;
-            background-color: white;
+            margin: 50px auto;
             padding: 30px;
+            background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .btn-pink {
-            background-color: #ff66cc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            width: 100%;
+        h1 {
+            text-align: center;
+            color: #ff66cc;
+            margin-bottom: 20px;
         }
-        .btn-pink:hover {
-            background-color: #ff3399;
+        label {
+            font-weight: bold;
+            color: #555;
         }
         input[type="text"], input[type="password"] {
             width: 100%;
@@ -41,22 +32,47 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+        .btn-pink {
+            background-color: #ff66cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-pink:hover {
+            background-color: #ff3399;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .signup-link a {
+            color: #ff66cc;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>Login to Knotique</h1>
-    <div class="login-form">
+    <div class="login-container">
+        <h1>Login to Knotique</h1>
         <form method="post">
             {% csrf_token %}
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            <br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <br>
             <button type="submit" class="btn-pink">Login</button>
         </form>
-        <p class="text-center mt-3">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        <div class="signup-link">
+            Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>
+        </div>
+        <div class="signup-link">
+            <a href="{% url 'homepage' %}">Back to Home</a>
+        </div>
     </div>
 </body>
 </html>

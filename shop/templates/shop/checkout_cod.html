@@ -12,19 +12,22 @@
         }
         h1 {
             color: #ff66cc;
+            font-size: 40px;
             margin-bottom: 20px;
         }
         p {
-            font-size: 18px;
+            font-size: 20px;
+            color: #555;
             margin-bottom: 30px;
         }
         .btn-pink {
             background-color: #ff66cc;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border-radius: 5px;
             text-decoration: none;
+            font-size: 18px;
             font-weight: bold;
             display: inline-block;
         }
@@ -32,11 +35,19 @@
             background-color: #ff3399;
             color: white;
         }
+        .success-icon {
+            font-size: 80px;
+            color: #ff66cc;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+    <div class="success-icon">✓</div>
     <h1>Order Confirmed!</h1>
     <p>Thank you for choosing Cash on Delivery.</p>
-    <a href="/" class="btn-pink">Return to Home</a>
+    <p>Your order will be delivered soon. Please keep the cash ready for payment upon delivery.</p>
+    <a href="{% url 'homepage' %}" class="btn-pink">Return to Home</a>
+    <a href="{% url 'products' %}" class="btn-pink">Continue Shopping</a>
 </body>
 </html>
