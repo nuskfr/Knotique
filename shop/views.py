@@ -67,8 +67,20 @@ def add_to_cart(request, item_id):
 
 def view_cart(request):
     cart = request.session.get('cart', {})
-    total = sum(item['price'] * item['quantity'] for item in cart.values())
-    return render(request, 'shop/cart.html', {'cart': cart, 'total': total})
+    # Calculate subtotal for each item and overall total
+    cart_items = []
+    total = 0
+    for item_id, item in cart.items():
+        subtotal = item['price'] * item['quantity']
+        cart_items.append({
+            'id': item_id,
+            'name': item['name'],
+            'price': item['price'],
+            'quantity': item['quantity'],
+            'subtotal': subtotal
+        })
+        total += subtotal
+    return render(request, 'shop/cart.html', {'cart_items': cart_items, 'total': total, 'cart': cart})
 
 def remove_from_cart(request, item_id):
     cart = request.session.get('cart', {})
@@ -79,9 +91,21 @@ def remove_from_cart(request, item_id):
     return redirect('view_cart')
 
 def checkout_cod(request):
+    """
+    Cash on Delivery checkout
+    Clears the cart after placing an order
+    """
     cart = request.session.get('cart', {})
     if not cart:
         return render(request, 'shop/checkout_empty.html')
-    # this will help clear the cart after placing an order
+    # Clear the cart after placing an order
     request.session['cart'] = {}
     return render(request, 'shop/checkout_cod.html', {'cart': cart})
+
+# TODO: Future eSewa payment gateway integration
+# When ready to integrate eSewa:
+# - Create checkout_esewa view
+# - Generate unique transaction IDs
+# - Implement eSewa API calls
+# - Handle success/failure callbacks
+# - Update URLs to include eSewa routes

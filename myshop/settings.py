@@ -80,16 +80,16 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'Knotique',    
-         'USER': 'postgres',    
-         'PASSWORD': 'nice2meety@',
-         'HOST': 'localhost',
-         'PORT': '5432',
-     }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Knotique',    
+#         'USER': 'postgres',    
+#         'PASSWORD': 'nice2meety@',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

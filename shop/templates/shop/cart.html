@@ -102,7 +102,7 @@
     </div>
     <h1>Your Shopping Cart</h1>
     <div class="container">
-        {% if cart %}
+        {% if cart_items %}
             <div class="cart-table">
                 <table>
                     <tr>
@@ -112,14 +112,14 @@
                         <th>Subtotal</th>
                         <th>Action</th>
                     </tr>
-                    {% for item_id, item in cart.items %}
+                    {% for item in cart_items %}
                         <tr>
                             <td>{{ item.name }}</td>
-                            <td>${{ item.price }}</td>
-                            <td>{{ item.quantity }}</td>
                             <td>${{ item.price|floatformat:2 }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.subtotal|floatformat:2 }}</td>
                             <td>
-                                <a href="{% url 'remove_from_cart' item_id %}" class="btn-remove">Remove</a>
+                                <a href="{% url 'remove_from_cart' item.id %}" class="btn-remove">Remove</a>
                             </td>
                         </tr>
                     {% endfor %}
