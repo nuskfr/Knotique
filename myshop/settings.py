@@ -73,6 +73,8 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Use SQLite for development/testing by default
+# For production with PostgreSQL, set environment variable DATABASE_URL or modify this section
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -80,7 +82,7 @@ DATABASES = {
     }
 }
 
-# For production, use PostgreSQL
+# Uncomment the following and comment the above to use PostgreSQL in production
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
