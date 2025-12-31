@@ -148,7 +148,7 @@
             margin: 50px auto;
             max-width: 1200px;
             height: 300px;
-            background-image: url('/media/crochet_images/explore_bg.jpg');
+            background-image: url('{{ MEDIA_URL }}crochet_images/explore_bg.jpg');
             background-size: cover;
             background-position: center;
             border-radius: 10px;
@@ -187,42 +187,53 @@
             transform: scale(1.05);
             transition: all 0.3s ease;
         }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <a href="{% url 'homepage' %}" title="Home"><i class="fas fa-home"></i></a>
+        <a href="{% url 'homepage' %}" title="Home"><i class="fas fa-home"></i><span class="sr-only">Home</span></a>
         <a href="{% url 'products' %}">All Products</a>
         <a href="{% url 'handwarmers' %}">Handwarmers</a>
         <a href="{% url 'skirts' %}">Skirts</a>
         <a href="{% url 'bouquets' %}">Bouquets</a>
-        <a href="{% url 'view_cart' %}" title="Cart"><i class="fas fa-shopping-cart"></i></a>
+        <a href="{% url 'view_cart' %}" title="Cart"><i class="fas fa-shopping-cart"></i><span class="sr-only">Cart</span></a>
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="{% url 'logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i><span class="sr-only">Logout</span></a>
         {% else %}
-            <a href="{% url 'login' %}" title="Login"><i class="fas fa-sign-in-alt"></i></a>
-            <a href="{% url 'signup' %}" title="Signup"><i class="fas fa-user-plus"></i></a>
+            <a href="{% url 'login' %}" title="Login"><i class="fas fa-sign-in-alt"></i><span class="sr-only">Login</span></a>
+            <a href="{% url 'signup' %}" title="Signup"><i class="fas fa-user-plus"></i><span class="sr-only">Signup</span></a>
         {% endif %}
     </div>
     <div class="logo-container">
-        <img src="/media/crochet_images/logo.png" alt="Knotique Logo" class="logo-img">
+        <img src="{{ MEDIA_URL }}crochet_images/logo.png" alt="Knotique Logo" class="logo-img">
         <h1>Knotique</h1>
     </div>
     <p class="intro">Welcome to Knotique, the best place for handmade crochet items!</p>
     <div class="product-columns">
         <div class="column">
             <h2>Handwarmers</h2>
-            <img src="/media/crochet_images/handlacewarmers.jpg" alt="Lace Handwarmer">
+            <img src="{{ MEDIA_URL }}crochet_images/handlacewarmers.jpg" alt="Lace Handwarmer">
             <a href="{% url 'handwarmers' %}" class="btn-pink">Explore Handwarmers</a>
         </div>
         <div class="column">
             <h2>Skirts</h2>
-            <img src="/media/crochet_images/pinkskirt.jpg" alt="Pink Skirt">
+            <img src="{{ MEDIA_URL }}crochet_images/pinkskirt.jpg" alt="Pink Skirt">
             <a href="{% url 'skirts' %}" class="btn-pink">Explore Skirts</a>
         </div>
         <div class="column">
             <h2>Bouquets</h2>
-            <img src="/media/crochet_images/rosebouquet.jpg" alt="Red Rose Bouquet">
+            <img src="{{ MEDIA_URL }}crochet_images/rosebouquet.jpg" alt="Red Rose Bouquet">
             <a href="{% url 'bouquets' %}" class="btn-pink">Explore Bouquets</a>
         </div>
     </div>
@@ -230,7 +241,7 @@
     <!-- Creator's Introduction Section -->
     <div class="creator-section">
         <div class="creator-intro">
-            <img src="/media/crochet_images/creator.jpg" alt="Creator Photo" class="creator-photo">
+            <img src="{{ MEDIA_URL }}crochet_images/creator.jpg" alt="Creator Photo" class="creator-photo">
             <h2 style="color: #ff66cc;">Meet the Creator</h2>
             <p>
                 Hello! I'm the passionate creator behind Knotique. Each piece is handmade with love and care, 
@@ -243,7 +254,7 @@
             <h3 style="color: #ff66cc; margin-bottom: 20px;">Customer Reviews</h3>
             <div class="review-item">
                 <div class="review-header">
-                    <img src="/media/crochet_images/reviewer1.jpg" alt="Shashswot" class="reviewer-photo">
+                    <img src="{{ MEDIA_URL }}crochet_images/reviewer1.jpg" alt="Shashswot" class="reviewer-photo">
                     <span class="reviewer-name">Shashswot</span>
                     <span class="stars">★★★★★</span>
                 </div>
@@ -251,7 +262,7 @@
             </div>
             <div class="review-item">
                 <div class="review-header">
-                    <img src="/media/crochet_images/reviewer2.jpg" alt="Sushab" class="reviewer-photo">
+                    <img src="{{ MEDIA_URL }}crochet_images/reviewer2.jpg" alt="Sushab" class="reviewer-photo">
                     <span class="reviewer-name">Sushab</span>
                     <span class="stars">★★★★☆</span>
                 </div>
@@ -259,7 +270,7 @@
             </div>
             <div class="review-item">
                 <div class="review-header">
-                    <img src="/media/crochet_images/reviewer3.jpg" alt="Sita" class="reviewer-photo">
+                    <img src="{{ MEDIA_URL }}crochet_images/reviewer3.jpg" alt="Sita" class="reviewer-photo">
                     <span class="reviewer-name">Sita</span>
                     <span class="stars">★★★★★</span>
                 </div>

@@ -62,21 +62,32 @@
             background-color: #ff3399; /* Darker pink on hover */
             color: white;
         }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <a href="{% url 'homepage' %}" title="Home"><i class="fas fa-home"></i></a>
+        <a href="{% url 'homepage' %}" title="Home"><i class="fas fa-home"></i><span class="sr-only">Home</span></a>
         <a href="{% url 'products' %}">All Products</a>
         <a href="{% url 'handwarmers' %}">Handwarmers</a>
         <a href="{% url 'skirts' %}">Skirts</a>
         <a href="{% url 'bouquets' %}">Bouquets</a>
-        <a href="{% url 'view_cart' %}" title="Cart"><i class="fas fa-shopping-cart"></i></a>
+        <a href="{% url 'view_cart' %}" title="Cart"><i class="fas fa-shopping-cart"></i><span class="sr-only">Cart</span></a>
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="{% url 'logout' %}" title="Logout"><i class="fas fa-sign-out-alt"></i><span class="sr-only">Logout</span></a>
         {% else %}
-            <a href="{% url 'login' %}" title="Login"><i class="fas fa-sign-in-alt"></i></a>
-            <a href="{% url 'signup' %}" title="Signup"><i class="fas fa-user-plus"></i></a>
+            <a href="{% url 'login' %}" title="Login"><i class="fas fa-sign-in-alt"></i><span class="sr-only">Login</span></a>
+            <a href="{% url 'signup' %}" title="Signup"><i class="fas fa-user-plus"></i><span class="sr-only">Signup</span></a>
         {% endif %}
     </div>
     <h1>Welcome to Knotique - Crochet Paradise!</h1>
