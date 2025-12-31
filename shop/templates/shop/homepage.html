@@ -6,7 +6,7 @@
     <style>
         body {
             background-color: #ffe6f2; /* Light pink background */
-            font-family: 'Pacifico', cursive; /* Cute font for Knotique */
+            font-family: Arial, sans-serif;
         }
         .navbar {
             background-color: #ff66cc;
@@ -23,11 +23,23 @@
         .navbar a:hover {
             text-decoration: underline;
         }
-        h1 {
-            color: #ff66cc;
+        .logo-section {
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+        .logo-section h1 {
+            display: inline;
+            color: #ff66cc;
             font-size: 50px;
+            font-family: 'Pacifico', cursive;
+            vertical-align: middle;
         }
         .intro {
             text-align: center;
@@ -47,6 +59,13 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .column img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
         .btn-pink {
             background-color: #ff66cc;
             color: white;
@@ -61,6 +80,98 @@
         .btn-pink:hover {
             background-color: #ff3399;
             color: white;
+        }
+        .creator-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px auto;
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .creator-section img {
+            width: 250px;
+            height: 250px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 30px;
+        }
+        .creator-text {
+            flex: 1;
+        }
+        .creator-text h2 {
+            color: #ff66cc;
+            margin-bottom: 15px;
+        }
+        .explore-section {
+            position: relative;
+            height: 400px;
+            background-image: url('/media/site_images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .explore-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .explore-section .btn-pink {
+            position: relative;
+            z-index: 1;
+            font-size: 24px;
+            padding: 15px 40px;
+        }
+        .reviews-preview {
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        .reviews-preview h2 {
+            text-align: center;
+            color: #ff66cc;
+            margin-bottom: 30px;
+        }
+        .reviewers-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .reviewer-card {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .reviewer-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .reviewer-card h4 {
+            color: #ff66cc;
+            margin: 10px 0;
+        }
+        .stars {
+            color: #ffd700;
+            font-size: 18px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -79,30 +190,68 @@
             <a href="{% url 'signup' %}">Signup</a>
         {% endif %}
     </div>
-    <h1>Knotique</h1>
+    <div class="logo-section">
+        <img src="/media/site_images/knotiquelogo.png" alt="Knotique Logo">
+        <h1>Knotique</h1>
+    </div>
     <p class="intro">Welcome to Knotique, the best place for handmade crochet items!</p>
+    
     <div class="product-columns">
         <div class="column">
+            <img src="/media/crochet_images/lacehandwarmer.jpg" alt="Lace Handwarmer">
             <h2>Handwarmers</h2>
             <p>Featuring: Lace Handwarmer</p>
             <a href="{% url 'handwarmers' %}" class="btn-pink">Explore Handwarmers</a>
         </div>
         <div class="column">
+            <img src="/media/crochet_images/pinkskirt.jpg" alt="Pink Skirt">
             <h2>Skirts</h2>
             <p>Featuring: Pink Skirt</p>
             <a href="{% url 'skirts' %}" class="btn-pink">Explore Skirts</a>
         </div>
         <div class="column">
+            <img src="/media/crochet_images/redrosebouquet.jpg" alt="Red Rose Bouquet">
             <h2>Bouquets</h2>
             <p>Featuring: Red Rose Bouquet</p>
             <a href="{% url 'bouquets' %}" class="btn-pink">Explore Bouquets</a>
         </div>
     </div>
-    <div class="text-center mt-4">
-        <a href="{% url 'products' %}" class="btn-pink">Explore All Items</a>
+    
+    <!-- Creator's Introduction Section -->
+    <div class="creator-section">
+        <img src="/media/site_images/creator.png" alt="Creator">
+        <div class="creator-text">
+            <h2>Meet the Creator</h2>
+            <p>Hello! I'm the passionate creator behind Knotique. With years of experience in crochet artistry, I pour my heart into every handmade piece. Each item is crafted with love, attention to detail, and the finest materials to bring you unique, beautiful creations that add warmth and charm to your life.</p>
+            <p>Thank you for supporting handmade craftsmanship!</p>
+        </div>
     </div>
-    <div class="text-center mt-4">
-        <a href="{% url 'reviews' %}" class="btn-pink">Check Reviews</a>
+    
+    <!-- Reviews Preview Section -->
+    <div class="reviews-preview">
+        <h2>What Our Customers Say</h2>
+        <div class="reviewers-grid">
+            {% for review in reviews %}
+            <div class="reviewer-card">
+                <img src="{{ review.image }}" alt="{{ review.user }}">
+                <h4>{{ review.user }}</h4>
+                <p>"{{ review.review }}"</p>
+                <div class="stars">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'reviews' %}" class="btn-pink">Check All Reviews</a>
+        </div>
+    </div>
+    
+    <!-- Explore Items Section with Background -->
+    <div class="explore-section">
+        <a href="{% url 'products' %}" class="btn-pink">Explore Items</a>
     </div>
 </body>
 </html>
