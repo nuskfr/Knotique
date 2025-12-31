@@ -8,6 +8,20 @@
             background-color: #ffe6f2; /* Light pink background */
             font-family: Arial, sans-serif;
         }
+        .navbar {
+            background-color: #ff66cc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
         h1 {
             color: #ff66cc; /* Highlighted pink */
             text-align: center;
@@ -23,6 +37,8 @@
         }
         .item-card img {
             max-width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 8px;
         }
         .item-card h2 {
@@ -37,29 +53,51 @@
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-pink:hover {
             background-color: #ff3399; /* Darker pink on hover */
+            color: white;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'products' %}">All Products</a>
+        <a href="{% url 'handwarmers' %}">Handwarmers</a>
+        <a href="{% url 'skirts' %}">Skirts</a>
+        <a href="{% url 'bouquets' %}">Bouquets</a>
+        <a href="{% url 'view_cart' %}">Cart</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </div>
     <h1>Welcome to Knotique - Crochet Paradise!</h1>
     <div class="container">
         <div class="row">
             {% for item in items %}
                 <div class="col-md-4">
                     <div class="item-card">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% endif %}
                         <h2>{{ item.name }}</h2>
                         <p>{{ item.description }}</p>
                         <p><strong>Price: ${{ item.price }}</strong></p>
                         <a href="{% url 'add_to_cart' item.id %}" class="btn-pink">Add to Cart</a>
-                        <a href="#" class="btn-pink">Buy Now</a>
                     </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="text-center">No products available at the moment.</p>
                 </div>
             {% endfor %}
         </div>
     </div>
 </body>
 </html>
-    

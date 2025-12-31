@@ -8,6 +8,21 @@
             background-color: #ffe6f2; /* Light pink background */
             font-family: 'Pacifico', cursive; /* Cute font for Knotique */
         }
+        .navbar {
+            background-color: #ff66cc;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
         h1 {
             color: #ff66cc;
             text-align: center;
@@ -40,38 +55,54 @@
             margin-top: 10px;
             border-radius: 5px;
             font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-pink:hover {
             background-color: #ff3399;
+            color: white;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'products' %}">All Products</a>
+        <a href="{% url 'handwarmers' %}">Handwarmers</a>
+        <a href="{% url 'skirts' %}">Skirts</a>
+        <a href="{% url 'bouquets' %}">Bouquets</a>
+        <a href="{% url 'view_cart' %}">Cart</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </div>
     <h1>Knotique</h1>
     <p class="intro">Welcome to Knotique, the best place for handmade crochet items!</p>
     <div class="product-columns">
-    <div class="column">
-        <h2>Handwarmers</h2>
-        <p>Featuring: Lace Handwarmer</p>
-        <a href="{% url 'handwarmers' %}" class="btn-pink">Explore Handwarmers</a>
-    </div>
-    <div class="column">
-        <h2>Skirts</h2>
-        <p>Featuring: Pink Skirt</p>
-        <a href="{% url 'skirts' %}" class="btn-pink">Explore Skirts</a>
-    </div>
-    <div class="column">
-        <h2>Bouquets</h2>
-        <p>Featuring: Red Rose Bouquet</p>
-        <a href="{% url 'bouquets' %}" class="btn-pink">Explore Bouquets</a>
-    </div>
-</div>
-        <div class="text-center mt-4">
-            <button class="btn-pink" onclick="window.location.href='/products/'">Explore All Items</button>
+        <div class="column">
+            <h2>Handwarmers</h2>
+            <p>Featuring: Lace Handwarmer</p>
+            <a href="{% url 'handwarmers' %}" class="btn-pink">Explore Handwarmers</a>
         </div>
-        <div class="text-center mt-4">
-            <button class="btn-pink" onclick="window.location.href='/reviews/'">Check Reviews</button>
+        <div class="column">
+            <h2>Skirts</h2>
+            <p>Featuring: Pink Skirt</p>
+            <a href="{% url 'skirts' %}" class="btn-pink">Explore Skirts</a>
         </div>
+        <div class="column">
+            <h2>Bouquets</h2>
+            <p>Featuring: Red Rose Bouquet</p>
+            <a href="{% url 'bouquets' %}" class="btn-pink">Explore Bouquets</a>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'products' %}" class="btn-pink">Explore All Items</a>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'reviews' %}" class="btn-pink">Check Reviews</a>
     </div>
 </body>
 </html>
