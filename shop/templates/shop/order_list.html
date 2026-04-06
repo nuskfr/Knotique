@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Orders – Knotique</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #ffe6f2; font-family: Arial, sans-serif; }
+        .navbar { background-color: #ff66cc; padding: 10px; margin-bottom: 20px; }
+        .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        .navbar a:hover { text-decoration: underline; }
+        .page-title { color: #ff66cc; text-align: center; margin-bottom: 24px; font-size: 2rem; font-weight: bold; }
+        .table-card {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(255,102,204,0.13);
+            padding: 28px 32px;
+            margin-bottom: 50px;
+        }
+        .btn-pink { background-color: #ff66cc; color: white; border: none; }
+        .btn-pink:hover { background-color: #ff3399; color: white; }
+        .badge-sameday { background-color: #ff66cc; color: white; border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; }
+        thead th { background-color: #ff66cc; color: white; }
+        .action-btns { white-space: nowrap; }
+        .empty-state { text-align: center; padding: 40px 0; color: #aaa; font-size: 1.2rem; }
+        .summary-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .summary-chip {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(255,102,204,0.1);
+            padding: 12px 24px;
+            font-weight: 700;
+            color: #ff66cc;
+            font-size: 1rem;
+        }
+        .summary-chip span { color: #333; font-weight: 400; display: block; font-size: 0.82rem; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="{% url 'order_list' %}">📋 Orders</a>
+        <a href="{% url 'add_order' %}">➕ Add Order</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+
+    <div class="container-fluid px-4">
+        <div class="page-title">📋 Order Records</div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Summary bar -->
+        {% if orders %}
+        <div class="summary-bar">
+            <div class="summary-chip">
+                {{ orders|length }}
+                <span>Total Orders</span>
+            </div>
+            <div class="summary-chip">
+                Rs {{ total_revenue|floatformat:2 }}
+                <span>Total Revenue</span>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'add_order' %}" class="btn btn-pink px-4">➕ New Order</a>
+        </div>
+
+        <div class="table-card">
+            {% if orders %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Item Bought</th>
+                            <th>Price (Rs)</th>
+                            <th>Order Date</th>
+                            <th>Delivery Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td class="text-muted small">{{ order.id }}</td>
+                            <td><strong>{{ order.customer_name }}</strong></td>
+                            <td>{{ order.item_bought }}</td>
+                            <td>{{ order.price }}</td>
+                            <td>{{ order.order_date }}</td>
+                            <td>
+                                {{ order.delivery_date }}
+                                {% if order.same_day %}
+                                    <span class="badge-sameday ms-1">Same day</span>
+                                {% endif %}
+                            </td>
+                            <td class="action-btns">
+                                <a href="{% url 'edit_order' order.id %}" class="btn btn-sm btn-outline-secondary me-1">✏️ Edit</a>
+                                <form method="post" action="{% url 'delete_order' order.id %}" style="display:inline;" onsubmit="return confirm('Delete this order?')">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">🗑 Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% if order.notes %}
+                        <tr class="table-light">
+                            <td></td>
+                            <td colspan="6" class="text-muted small fst-italic">📝 {{ order.notes }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                No orders yet. <a href="{% url 'add_order' %}">Add the first one!</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
