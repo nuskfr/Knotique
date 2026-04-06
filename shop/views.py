@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from shop.models import CrochetItem
+from django.shortcuts import render, redirect, get_object_or_404
+from shop.models import CrochetItem, Order
+from shop.forms import OrderForm
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Sample reviews data shared across views
 SAMPLE_REVIEWS = [
@@ -114,3 +116,48 @@ def checkout_cod(request):
 # - Implement eSewa API calls
 # - Handle success/failure callbacks
 # - Update URLs to include eSewa routes
+
+
+# ── Order Management (owner only) ──────────────────────────────────────────────
+
+@login_required
+def order_list(request):
+    orders = Order.objects.all()
+    total_revenue = sum(o.price for o in orders)
+    return render(request, 'shop/order_list.html', {'orders': orders, 'total_revenue': total_revenue})
+
+
+@login_required
+def add_order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Order saved successfully!')
+            return redirect('order_list')
+    else:
+        form = OrderForm()
+    return render(request, 'shop/add_order.html', {'form': form})
+
+
+@login_required
+def edit_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Order updated!')
+            return redirect('order_list')
+    else:
+        form = OrderForm(instance=order)
+    return render(request, 'shop/add_order.html', {'form': form, 'editing': True, 'order': order})
+
+
+@login_required
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if request.method == 'POST':
+        order.delete()
+        messages.success(request, 'Order deleted.')
+    return redirect('order_list')
